@@ -1,0 +1,14 @@
+data/*.csv
+raw/*.zip
+model/*.npz
+__pycache__/
+*.pyc
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.env
+work/
+__pycache__/
+.venv/
+.packages/

@@ -1,0 +1,14 @@
+.git
+.github
+data/
+raw/
+model/
+work/
+infra/
+tests/
+__pycache__/
+*.pyc
+.terraform/
+*.tfstate*
+*.tfvars
+.env

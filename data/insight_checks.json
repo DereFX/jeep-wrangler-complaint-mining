@@ -1,0 +1,12 @@
+{
+  "peak_month": "2025-10",
+  "peak_total_complaints": 222,
+  "dominant_cluster_id": 3,
+  "dominant_cluster_label": "Unexpected shutdown and restart",
+  "dominant_cluster_complaints": 153,
+  "dominant_cluster_share_of_peak_percent": 68.9,
+  "dominant_cluster_update_word_mentions": 121,
+  "dominant_cluster_model_year_2024": 142,
+  "low_similarity_review_count": 95,
+  "interpretation": "Keyword mentions and cluster membership are descriptive, not proof of cause or defect."
+}

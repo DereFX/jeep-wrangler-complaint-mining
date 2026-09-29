@@ -1,0 +1,396 @@
+{
+  "method": "TF-IDF unigrams and bigrams; spherical k-means using cosine similarity",
+  "documents": 1578,
+  "features": 3300,
+  "clusters": 8,
+  "mean_assignment_cosine": 0.2925,
+  "sample_silhouette_cosine": 0.0493,
+  "low_similarity_review_count": 95,
+  "clusters_detail": [
+    {
+      "cluster_id": 1,
+      "label": "Steering assist and dashboard warnings",
+      "count": 267,
+      "share_percent": 16.9,
+      "mean_cosine_similarity": 0.255,
+      "top_terms": [
+        "steering",
+        "power steering",
+        "lights",
+        "power",
+        "light",
+        "control",
+        "engine",
+        "warning",
+        "start",
+        "abs",
+        "shifter",
+        "check",
+        "turn",
+        "dash"
+      ],
+      "representative_complaint_ids": [
+        "11513655",
+        "11460701",
+        "11459193",
+        "11469718",
+        "11481026"
+      ],
+      "top_months": [
+        [
+          "2025-10",
+          19
+        ],
+        [
+          "2023-08",
+          11
+        ],
+        [
+          "2023-06",
+          9
+        ],
+        [
+          "2025-05",
+          9
+        ]
+      ]
+    },
+    {
+      "cluster_id": 2,
+      "label": "Display, radio, and backup camera",
+      "count": 130,
+      "share_percent": 8.2,
+      "mean_cosine_similarity": 0.216,
+      "top_terms": [
+        "screen",
+        "camera",
+        "radio",
+        "working",
+        "backup",
+        "backup camera",
+        "know",
+        "miles",
+        "reverse",
+        "rear",
+        "still",
+        "jeeps",
+        "safety",
+        "since"
+      ],
+      "representative_complaint_ids": [
+        "11716118",
+        "11684696",
+        "11388415",
+        "11492400",
+        "11625977"
+      ],
+      "top_months": [
+        [
+          "2025-10",
+          7
+        ],
+        [
+          "2025-04",
+          6
+        ],
+        [
+          "2025-12",
+          6
+        ],
+        [
+          "2026-02",
+          6
+        ]
+      ]
+    },
+    {
+      "cluster_id": 3,
+      "label": "Unexpected shutdown and restart",
+      "count": 278,
+      "share_percent": 17.6,
+      "mean_cosine_similarity": 0.245,
+      "top_terms": [
+        "update",
+        "shut",
+        "engine",
+        "park",
+        "drive",
+        "power",
+        "put",
+        "restart",
+        "road",
+        "light",
+        "software",
+        "stop",
+        "software update",
+        "engine light"
+      ],
+      "representative_complaint_ids": [
+        "11692706",
+        "11692698",
+        "11692809",
+        "11693491",
+        "11695046"
+      ],
+      "top_months": [
+        [
+          "2025-10",
+          153
+        ],
+        [
+          "2025-11",
+          7
+        ],
+        [
+          "2024-07",
+          6
+        ],
+        [
+          "2021-08",
+          5
+        ]
+      ]
+    },
+    {
+      "cluster_id": 4,
+      "label": "Recall repair parts unavailable",
+      "count": 111,
+      "share_percent": 7.0,
+      "mean_cosine_similarity": 0.664,
+      "top_terms": [
+        "available",
+        "received notification",
+        "made aware",
+        "parts",
+        "notification",
+        "parts not",
+        "aware",
+        "however part",
+        "recall",
+        "part recall",
+        "yet available",
+        "made",
+        "received",
+        "not yet"
+      ],
+      "representative_complaint_ids": [
+        "11622456",
+        "11559217",
+        "11567297",
+        "11560831",
+        "11570708"
+      ],
+      "top_months": [
+        [
+          "2024-10",
+          16
+        ],
+        [
+          "2024-01",
+          15
+        ],
+        [
+          "2024-11",
+          14
+        ],
+        [
+          "2023-12",
+          12
+        ]
+      ]
+    },
+    {
+      "cluster_id": 5,
+      "label": "Hybrid drive power loss",
+      "count": 220,
+      "share_percent": 13.9,
+      "mean_cosine_similarity": 0.248,
+      "top_terms": [
+        "power",
+        "mode",
+        "battery",
+        "loss",
+        "electric",
+        "hybrid",
+        "traffic",
+        "highway",
+        "engine",
+        "mph",
+        "electric mode",
+        "recall",
+        "software",
+        "warning"
+      ],
+      "representative_complaint_ids": [
+        "11716350",
+        "11749532",
+        "11642754",
+        "11747105",
+        "11743120"
+      ],
+      "top_months": [
+        [
+          "2025-10",
+          30
+        ],
+        [
+          "2026-06",
+          23
+        ],
+        [
+          "2026-01",
+          11
+        ],
+        [
+          "2026-02",
+          11
+        ]
+      ]
+    },
+    {
+      "cluster_id": 6,
+      "label": "Instrument cluster and gauges",
+      "count": 233,
+      "share_percent": 14.8,
+      "mean_cosine_similarity": 0.328,
+      "top_terms": [
+        "instrument",
+        "cluster",
+        "panel",
+        "instrument panel",
+        "instrument cluster",
+        "vin not",
+        "recall",
+        "included",
+        "vin",
+        "blank",
+        "not included",
+        "notified",
+        "v652000",
+        "taken"
+      ],
+      "representative_complaint_ids": [
+        "11757421",
+        "11667824",
+        "11678434",
+        "11730824",
+        "11717585"
+      ],
+      "top_months": [
+        [
+          "2025-12",
+          15
+        ],
+        [
+          "2024-10",
+          14
+        ],
+        [
+          "2025-03",
+          13
+        ],
+        [
+          "2026-02",
+          13
+        ]
+      ]
+    },
+    {
+      "cluster_id": 7,
+      "label": "Battery fire and charging restrictions",
+      "count": 172,
+      "share_percent": 10.9,
+      "mean_cosine_similarity": 0.233,
+      "top_terms": [
+        "fire",
+        "recall",
+        "battery",
+        "charge",
+        "garage",
+        "fix",
+        "now",
+        "park",
+        "hybrid",
+        "use",
+        "recalls",
+        "due",
+        "risk",
+        "caught"
+      ],
+      "representative_complaint_ids": [
+        "11705318",
+        "11706717",
+        "11717620",
+        "11622045",
+        "11644188"
+      ],
+      "top_months": [
+        [
+          "2025-12",
+          21
+        ],
+        [
+          "2024-10",
+          18
+        ],
+        [
+          "2026-01",
+          13
+        ],
+        [
+          "2024-11",
+          11
+        ]
+      ]
+    },
+    {
+      "cluster_id": 8,
+      "label": "Broader safety recall concerns",
+      "count": 167,
+      "share_percent": 10.6,
+      "mean_cosine_similarity": 0.315,
+      "top_terms": [
+        "safety",
+        "risk",
+        "recall",
+        "fire",
+        "remedy",
+        "available",
+        "fire risk",
+        "stellantis",
+        "defect",
+        "safety recall",
+        "battery",
+        "due",
+        "recalls",
+        "currently"
+      ],
+      "representative_complaint_ids": [
+        "11701242",
+        "11698847",
+        "11700810",
+        "11707507",
+        "11704904"
+      ],
+      "top_months": [
+        [
+          "2025-11",
+          34
+        ],
+        [
+          "2025-12",
+          33
+        ],
+        [
+          "2026-02",
+          14
+        ],
+        [
+          "2026-06",
+          14
+        ]
+      ]
+    }
+  ],
+  "note": "Cluster labels are unsupervised suggestions; inspect review_samples.csv before interpreting them."
+}

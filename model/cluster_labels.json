@@ -1,0 +1,14 @@
+{
+  "cluster_count": 8,
+  "labels": {
+    "1": "Steering assist and dashboard warnings",
+    "2": "Display, radio, and backup camera",
+    "3": "Unexpected shutdown and restart",
+    "4": "Recall repair parts unavailable",
+    "5": "Hybrid drive power loss",
+    "6": "Instrument cluster and gauges",
+    "7": "Battery fire and charging restrictions",
+    "8": "Broader safety recall concerns"
+  },
+  "note": "Human-readable labels assigned after inspecting representative and random complaints. Clusters 7 and 8 overlap."
+}

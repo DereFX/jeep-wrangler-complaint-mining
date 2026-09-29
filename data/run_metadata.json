@@ -1,0 +1,52 @@
+{
+  "cohort": {
+    "make": "JEEP",
+    "model": "WRANGLER",
+    "component": "ELECTRICAL SYSTEM",
+    "model_years": [
+      2018,
+      2025
+    ],
+    "received_dates": [
+      "2020-01-01",
+      "2026-08-31"
+    ]
+  },
+  "source_files": [
+    {
+      "file": "complaints_2020_2024.zip",
+      "url": "https://static.nhtsa.gov/odi/ffdd/cmpl/COMPLAINTS_RECEIVED_2020-2024.zip",
+      "bytes": 75873835,
+      "sha256": "b94ce025cb0e910d45b9df99383bbc85bb955d5d526d16dda4e108076a25a714"
+    },
+    {
+      "file": "complaints_2025_2026.zip",
+      "url": "https://static.nhtsa.gov/odi/ffdd/cmpl/COMPLAINTS_RECEIVED_2025-2026.zip",
+      "bytes": 39444652,
+      "sha256": "b38eee50a1b62a4d707d6554f40edd00cdee6ef4fc6d4f94ed450e2f21952103"
+    }
+  ],
+  "counts": {
+    "duplicate_component_rows": 3,
+    "in_scope_rows": 1609,
+    "matching_component_rows": 1915,
+    "matching_vehicle_rows": 9750,
+    "output_complaints": 1578,
+    "outside_scope": 306,
+    "short_or_empty_narrative": 28,
+    "source_rows": 612781
+  },
+  "monthly_range": [
+    "2020-01",
+    "2026-08"
+  ],
+  "fields": [
+    "complaint_id",
+    "received_date",
+    "model_year",
+    "component",
+    "complaint_source_code",
+    "narrative"
+  ],
+  "note": "Narratives are public source text with regex masking of VIN-like strings, email addresses, and phone numbers. Review before public redistribution."
+}

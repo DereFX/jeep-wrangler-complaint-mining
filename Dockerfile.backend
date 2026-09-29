@@ -1,0 +1,7 @@
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements-backend.txt ./
+RUN pip install --no-cache-dir -r requirements-backend.txt
+COPY cloud/ ./cloud/
+ENTRYPOINT ["python", "-m", "awslambdaric"]
+CMD ["cloud.aws_handlers.api_handler"]
