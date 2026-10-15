@@ -70,7 +70,7 @@ The largest month is October 2025: 222 complaints, including 153 assigned to the
 
 ## Cloud application
 
-The project now implements the team's end-to-end pipeline: a standard JSON REST API, raw claims in S3, containerized Lambda preprocessing, Gemini classification through `classify_claim()`, DynamoDB operational records, and a Streamlit dashboard on App Runner. Terraform defines the AWS resources. See [ARCHITECTURE.md](ARCHITECTURE.md), [API.md](API.md), and [DEPLOYMENT.md](DEPLOYMENT.md).
+The project now implements the team's end-to-end pipeline: a standard JSON REST API, raw claims in S3, containerized Lambda preprocessing, Gemini classification through `classify_claim()`, DynamoDB operational records, and a Streamlit dashboard on AWS App Runner. Terraform defines the AWS resources. See [ARCHITECTURE.md](ARCHITECTURE.md), [API.md](API.md), and [DEPLOYMENT.md](DEPLOYMENT.md).
 
 The eight Phase 2 clusters were used to define reviewable issue families. Gemini assigns each incoming complaint to one of those families or `other`; it does **not** discover new unsupervised clusters on every submission. The dashboard shows which issue families account for the most complaints and how their monthly counts change.
 
@@ -90,6 +90,6 @@ python backfill.py --limit 20
 
 Install `requirements-dashboard.txt` and run `streamlit run dashboard/app.py` to view the dashboard at `http://localhost:8501`. Enter `local-demo-token` at the dashboard access prompt. Local JSON files are written outside this deliverable under the workspace `work/local_data` directory.
 
-The AWS and GitHub deployment is pending account and repository setup. The source, containers, Terraform, and deployment sequence are prepared; no live infrastructure or Gemini inference has been claimed. The dashboard access token is a simple course demonstration control. Real warranty data requires stronger identity controls and privacy review before sending claim text to Gemini.
+The AWS deployment assets are prepared: backend and dashboard containers, Terraform, a restricted GitHub OIDC role, a hosted image-build workflow, and the deployment sequence. No live infrastructure or Gemini inference is claimed until Terraform is applied and the smoke test passes. Docker Desktop is not required because GitHub Actions can build and push both images. The dashboard access token is a simple course demonstration control. Real warranty data requires stronger identity controls and privacy review before sending claim text to Gemini.
 
 The source is voluntary complaint reporting, so counts are affected by awareness and reporting behavior. There is no vehicle population denominator here; the dashboard must call these **complaint counts**, not failure rates. The script masks VIN-like strings, email addresses, and phone numbers, but automated masking is incomplete and the narrative file should remain out of the public Git repository.
