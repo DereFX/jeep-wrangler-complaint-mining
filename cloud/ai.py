@@ -86,10 +86,10 @@ class GeminiClassifier:
             raise InferenceError("Gemini did not return valid structured JSON") from error
 
 
-class MockClassifier:
-    """Deterministic local demonstration only; never a production fallback."""
+class KeywordClassifier:
+    """Transparent keyword rules for reproducible batch demonstrations."""
 
-    name = "mock"
+    name = "keyword_rules"
 
     def classify(self, text: str) -> dict:
         lower = text.lower()
@@ -117,3 +117,9 @@ class MockClassifier:
             "symptom_summary": ISSUE_LABELS[family],
             "needs_human_review": family in {"other", "safety_recall", "recall_parts"},
         }
+
+
+class MockClassifier(KeywordClassifier):
+    """Local test adapter using the same deterministic keyword rules."""
+
+    name = "mock"

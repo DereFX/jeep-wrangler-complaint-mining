@@ -18,6 +18,7 @@ flowchart LR
 3. **Preprocessing:** An S3 object-created event invokes a containerized Lambda. `cloud.pipeline` validates the claim and masks common VIN, phone, and email patterns before inference.
 4. **AI inference:** The portable pipeline calls `classify_claim(text, provider)`. `cloud.ai.GeminiClassifier` owns the Gemini REST request. `MockClassifier` exists only for local demonstration and tests; AWS explicitly constructs Gemini. The issue families use the eight themes discovered in Phase 2.
 5. **Operational storage:** DynamoDB stores one processed item per complaint ID. The worker skips a repeated S3 object with the same ETag and uses a conditional write to avoid duplicate final records. Lambda retries failed events and sends exhausted failures to SQS.
+   For the course demonstration, a manually invoked bulk-loader Lambda reads the cleaned `datasets/complaints.csv` object and writes reproducible keyword-taxonomy results to the same DynamoDB table. This avoids 1,578 external LLM calls and keeps the bulk evidence load separate from the live Gemini path.
 6. **Dashboard:** Streamlit reads the authenticated REST API and runs in an App Runner container. Viewers enter the shared access token before seeing issue counts, monthly trends, review flags, or complaint text.
 7. **Infrastructure:** Terraform provisions ECR, Secrets Manager, S3, DynamoDB, Lambda, API Gateway, App Runner, IAM, logs, and a failure queue.
 

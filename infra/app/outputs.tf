@@ -14,6 +14,10 @@ output "claims_table" {
   value = aws_dynamodb_table.claims.name
 }
 
+output "bulk_loader_function" {
+  value = aws_lambda_function.bulk_loader.function_name
+}
+
 output "worker_failure_queue" {
   value = aws_sqs_queue.worker_failures.name
 }

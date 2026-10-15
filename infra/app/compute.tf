@@ -8,6 +8,11 @@ resource "aws_cloudwatch_log_group" "worker" {
   retention_in_days = 14
 }
 
+resource "aws_cloudwatch_log_group" "bulk_loader" {
+  name              = "/aws/lambda/${var.project_name}-bulk-loader"
+  retention_in_days = 14
+}
+
 resource "aws_lambda_function" "api" {
   function_name = "${var.project_name}-api"
   role          = aws_iam_role.api.arn
@@ -52,6 +57,29 @@ resource "aws_lambda_function" "worker" {
   }
 
   depends_on = [aws_iam_role_policy_attachment.worker_logs, aws_cloudwatch_log_group.worker]
+}
+
+resource "aws_lambda_function" "bulk_loader" {
+  function_name = "${var.project_name}-bulk-loader"
+  role          = aws_iam_role.bulk_loader.arn
+  package_type  = "Image"
+  image_uri     = var.backend_image_uri
+  timeout       = 300
+  memory_size   = 512
+
+  image_config {
+    command = ["cloud.aws_handlers.bulk_import_handler"]
+  }
+
+  environment {
+    variables = {
+      BULK_BUCKET  = aws_s3_bucket.raw.bucket
+      BULK_KEY     = "datasets/complaints.csv"
+      CLAIMS_TABLE = aws_dynamodb_table.claims.name
+    }
+  }
+
+  depends_on = [aws_iam_role_policy_attachment.bulk_loader_logs, aws_cloudwatch_log_group.bulk_loader]
 }
 
 resource "aws_lambda_function_event_invoke_config" "worker" {

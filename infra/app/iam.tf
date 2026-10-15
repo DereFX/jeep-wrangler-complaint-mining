@@ -18,6 +18,11 @@ resource "aws_iam_role" "worker" {
   assume_role_policy = data.aws_iam_policy_document.lambda_assume.json
 }
 
+resource "aws_iam_role" "bulk_loader" {
+  name               = "${var.project_name}-bulk-loader"
+  assume_role_policy = data.aws_iam_policy_document.lambda_assume.json
+}
+
 resource "aws_iam_role_policy_attachment" "api_logs" {
   role       = aws_iam_role.api.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
@@ -25,6 +30,11 @@ resource "aws_iam_role_policy_attachment" "api_logs" {
 
 resource "aws_iam_role_policy_attachment" "worker_logs" {
   role       = aws_iam_role.worker.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy_attachment" "bulk_loader_logs" {
+  role       = aws_iam_role.bulk_loader.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
@@ -51,6 +61,18 @@ resource "aws_iam_role_policy" "worker" {
       { Effect = "Allow", Action = ["dynamodb:GetItem", "dynamodb:PutItem"], Resource = [aws_dynamodb_table.claims.arn] },
       { Effect = "Allow", Action = ["secretsmanager:GetSecretValue"], Resource = [data.aws_secretsmanager_secret.gemini.arn] },
       { Effect = "Allow", Action = ["sqs:SendMessage"], Resource = [aws_sqs_queue.worker_failures.arn] }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "bulk_loader" {
+  name = "${var.project_name}-bulk-loader-access"
+  role = aws_iam_role.bulk_loader.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      { Effect = "Allow", Action = ["s3:GetObject"], Resource = ["${aws_s3_bucket.raw.arn}/datasets/*"] },
+      { Effect = "Allow", Action = ["dynamodb:BatchWriteItem", "dynamodb:PutItem"], Resource = [aws_dynamodb_table.claims.arn] }
     ]
   })
 }

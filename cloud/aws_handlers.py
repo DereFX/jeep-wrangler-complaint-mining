@@ -4,14 +4,16 @@ from __future__ import annotations
 
 import base64
 import binascii
+import csv
 import hmac
+import io
 import json
 import os
 from decimal import Decimal
 from functools import lru_cache
 from urllib.parse import unquote_plus
 
-from .ai import GeminiClassifier
+from .ai import GeminiClassifier, KeywordClassifier
 from .core import ClaimValidationError
 from .pipeline import prepare_raw_claim, process_claim
 from .queries import claim_view, summarize
@@ -166,3 +168,53 @@ def process_handler(event, context):
             raise
         processed += 1
     return {"processed": processed, "skipped": skipped}
+
+
+def bulk_import_handler(event, context):
+    """Load the cleaned CSV in S3 into DynamoDB for a controlled demonstration.
+
+    This handler is invoked manually. It uses transparent keyword rules rather
+    than calling an external AI service 1,578 times. Re-running it is safe:
+    DynamoDB batch writes replace items with the same complaint_id.
+    """
+    bucket = str(event.get("bucket") or os.environ["BULK_BUCKET"])
+    key = str(event.get("key") or os.environ.get("BULK_KEY", "datasets/complaints.csv"))
+    requested_limit = event.get("limit")
+    limit = max(1, min(int(requested_limit), 10_000)) if requested_limit is not None else None
+
+    source = _boto3().client("s3").get_object(Bucket=bucket, Key=key)
+    etag = source.get("ETag", "").strip('"')
+    text = io.TextIOWrapper(source["Body"], encoding="utf-8-sig", newline="")
+    reader = csv.DictReader(text)
+    provider = KeywordClassifier()
+    table = _table()
+    processed = 0
+    rejected = 0
+
+    with table.batch_writer(overwrite_by_pkeys=["complaint_id"]) as batch:
+        for row_number, row in enumerate(reader, start=2):
+            if limit is not None and processed >= limit:
+                break
+            try:
+                item = process_claim(prepare_raw_claim(row), provider)
+            except (ClaimValidationError, ValueError):
+                rejected += 1
+                continue
+            item.update({
+                "raw_s3_key": key,
+                "source_etag": etag,
+                "ai_model": "keyword-taxonomy-v1",
+                "import_row": row_number,
+            })
+            batch.put_item(Item=item)
+            processed += 1
+
+    result = {
+        "processed": processed,
+        "rejected": rejected,
+        "bucket": bucket,
+        "key": key,
+        "classifier": provider.name,
+    }
+    print(json.dumps(result))
+    return result
