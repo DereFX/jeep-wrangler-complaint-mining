@@ -32,13 +32,12 @@ resource "aws_lambda_function" "api" {
 }
 
 resource "aws_lambda_function" "worker" {
-  function_name                  = "${var.project_name}-worker"
-  role                           = aws_iam_role.worker.arn
-  package_type                   = "Image"
-  image_uri                      = var.backend_image_uri
-  timeout                        = 120
-  memory_size                    = 1024
-  reserved_concurrent_executions = 2
+  function_name = "${var.project_name}-worker"
+  role          = aws_iam_role.worker.arn
+  package_type  = "Image"
+  image_uri     = var.backend_image_uri
+  timeout       = 120
+  memory_size   = 1024
 
   image_config {
     command = ["cloud.aws_handlers.process_handler"]
